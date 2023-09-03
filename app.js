@@ -15,6 +15,19 @@ const http = require('http');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
 
+//Require the composer API from the routes file
+const composerAPI = require('./routes/taplin-composer-routes');
+
+//Create a variable for a MongoDB connection string
+const CONN = 'mongodb+srv://web420_user:s3cret@composers.7jfs9oc.mongodb.net/';
+
+//Connect to MongoDB and output a message stating success for failure to do so
+mongoose.connect(CONN).then(() => {
+    console.log('Connection to MongoDB database was successful\n  If you see this message it means you were able to connect to your MongoDB Atlas cluster');
+}).catch(err => {
+    console.log('MongoDB Error: ' + err.message);
+})
+
 //Create an app variable set to the express library
 const app = express();
 
@@ -38,6 +51,9 @@ const options = {
 const openapiSpecification = swaggerJsdoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
+
+//Use the composer API
+app.use('/api', composerAPI)
 
 app.listen(PORT, () => {
     console.log('Application started and listening on PORT ' + PORT);
