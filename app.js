@@ -19,7 +19,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const composerAPI = require('./routes/taplin-composer-routes');
 
 //Create a variable for a MongoDB connection string
-const CONN = 'mongodb+srv://web420_user:s3cret@composers.7jfs9oc.mongodb.net/';
+const CONN = 'mongodb+srv://web420_user:<temp>@composers.7jfs9oc.mongodb.net/';
 
 //Connect to MongoDB and output a message stating success for failure to do so
 mongoose.connect(CONN).then(() => {
