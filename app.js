@@ -52,8 +52,9 @@ const openapiSpecification = swaggerJsdoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
-//Use the composer API
+//Use the composer API and person API
 app.use('/api', composerAPI)
+app.use('/api', personAPI);
 
 app.listen(PORT, () => {
     console.log('Application started and listening on PORT ' + PORT);
