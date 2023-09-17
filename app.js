@@ -17,6 +17,8 @@ const swaggerJsdoc = require('swagger-jsdoc');
 
 //Require the composer API from the routes file
 const composerAPI = require('./routes/taplin-composer-routes');
+const personAPI = require('./routes/taplin-person-routes')
+const userAPI = require('./routes/taplin-session-routes')
 
 //Create a variable for a MongoDB connection string
 const CONN = 'mongodb+srv://web420_user:<temp>@composers.7jfs9oc.mongodb.net/';
@@ -52,9 +54,10 @@ const openapiSpecification = swaggerJsdoc(options);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
-//Use the composer API and person API
-app.use('/api', composerAPI)
+//Use the APIs built in class
+app.use('/api', composerAPI);
 app.use('/api', personAPI);
+app.use('/api', userAPI);
 
 app.listen(PORT, () => {
     console.log('Application started and listening on PORT ' + PORT);
