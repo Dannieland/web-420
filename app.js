@@ -72,6 +72,7 @@ app.use('/api', sessionRoutes);
 app.use('/api', customerAPI);
 
 
-app.listen(PORT, () => {
-    console.log('Application started and listening on PORT ' + PORT);
+// Server location
+http.createServer(app).listen(port, () => {
+    console.log(`Application started and listening on port ${port}`);
 });
