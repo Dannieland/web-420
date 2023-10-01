@@ -82,30 +82,6 @@ paths:
           description: Server Exception
         '501':
           description: MongoDB Exception
-  #describe findComposersById GET operation
-  /composers/{id}:
-    get:
-      tags:
-        - Composers
-      summary: Returns a composer document
-      description: API for returning a single composer object from MongoDB
-      operationId: findComposerById
-      #describe id string parameter of the operation
-      parameters:
-        - name: id
-          in: path
-          description: The composerId requested by the user
-          required: true
-          schema:
-            type: string
-      #describe responses of operation
-      responses:
-        '200':
-          description: Composer document in JSON found
-        '500':
-          description: Server Exception
-        '501':
-          description: MongoDB Exception
 
       #Describe the findComposerById GET operations and responses
   /api/composers/{id}:
