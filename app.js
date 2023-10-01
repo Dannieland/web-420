@@ -73,6 +73,6 @@ app.use('/api', customerAPI);
 
 
 // Server location
-http.createServer(app).listen(port, () => {
-    console.log(`Application started and listening on port ${port}`);
+http.createServer(app).listen(PORT, () => {
+    console.log(`Application started and listening on port ${PORT}`);
 });
