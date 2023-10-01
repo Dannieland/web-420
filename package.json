@@ -2,7 +2,7 @@
   "name": "web-420",
   "version": "1.0.0",
   "description": "web 420 dependencies",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "nodemon app.js"
   },

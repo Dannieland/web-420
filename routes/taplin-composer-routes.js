@@ -149,6 +149,7 @@ router.post('/composers', async(req, res) => {
             if (err) {
                 //output error message to console and send response
                 console.log(err);
+                console.log("here");
                 res.status(501).send({
                     'message': `MongoDB Exception: ${err}`
                 })
@@ -167,5 +168,57 @@ router.post('/composers', async(req, res) => {
     }
 })
 
+/**
+ * deleteComposerById
+ * @openapi
+ * /api/composers/{id}:
+ *   delete:
+ *     tags:
+ *       - Composers
+ *     name: deleteComposerById
+ *     description: API for deleting a document from MongoDB.
+ *     summary: Removes a document from MongoDB.
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: id of the document to remove. 
+ *         schema: 
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Composer deleted
+ *       '500':
+ *         description: Server Exception
+ *       '501':
+ *         description: MongoDB Exception
+ */
+  router.delete('/composers/:id', async (req, res) => {
+  try {
+      //store requested composer ID as variable
+      const composerDocId = req.params.id;
+
+      //find and delete composer document with requested ID
+      Composer.findByIdAndDelete({'_id': composerDocId}, function(err, composer) {
+          if (err) {
+              //if mongodb encounters an error output to console and send as response
+              console.log(err);
+              res.status(501).send({
+                  'message': `MongoDB Exception: ${err}`
+              })
+          } else {
+              //if document is successfully deleted output to console and send as response
+              console.log(composer);
+              res.json(composer);
+          }
+      })
+  } catch (e) {
+      //if server encounters error output to console and send as response
+      console.log(e);
+      res.status(500).send({
+          'message': `Server Exception: ${e.message}`
+      })
+  }
+})
 //export finished module
 module.exports = router;

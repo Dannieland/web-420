@@ -22,7 +22,7 @@ const userAPI = require('./routes/taplin-session-routes')
 const customerAPI = require('./routes/taplin-node-shopper-routes')
 
 //create variable for MongoDB connection string
-const CONN = 'mongodb+srv://web420_user:s3cret@composers.7jfs9oc.mongodb.net/';
+const CONN = 'mongodb+srv://web420_user:s3cret@composers.7jfs9oc.mongodb.net/web420DB';
 
 //connect to MongoDB and output message stating success or failure to connect
 mongoose.connect(CONN).then(() => {
