@@ -11,21 +11,6 @@ const express = require('express');
 const router = express.Router();
 const Composer = require('../models/taplin-composer');
 
-/**findAllComposers
-  @openapi
-  /api/composers:
-    get:
-      tags:
-        - Composers
-      description: API for returning an array of composer objects.
-      summary: returns an array of composers in JSON format.
-      responses:
-        '200':
-          description: Array of composers
-        '500':
-          description: Server Exception
-        '501':
-          description: MongoDB Exception*/
 
 
 router.get('/composers', async(req, res) => {
@@ -54,28 +39,6 @@ router.get('/composers', async(req, res) => {
     }
 })
 
-/**findComposerById
- @openapi
-  /api/composers/{id}:
-    get:
-      tags:
-        - Composers
-      description:  API for returning a composer document
-      summary: returns a composer document
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: Composer document id
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Composer document
-        '500':
-          description: Server exception
-        '501':
-          description: MongoDB Exception*/
 
 
 router.get('/composers/:id', async(req, res) => {
@@ -104,35 +67,6 @@ router.get('/composers/:id', async(req, res) => {
     }
 })
 
-/**createComposer
- @openapi
-  /api/composers:
-    post:
-      tags:
-        - Composers
-      name: createComposer
-      description: API for adding a new composer document to MongoDB Atlas
-      summary: Creates a new composer document
-      requestBody:
-        description: Composer information
-        content:
-          application/json:
-            schema:
-              required:
-                - firstName
-                - lastName
-              properties:
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-      responses:
-        '200':
-          description: Composer added
-        '500':
-          description: Server Exception
-        '501':
-          description: MongoDB Exception*/
 
 
 router.post('/composers', async(req, res) => {

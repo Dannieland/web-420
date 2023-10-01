@@ -10,23 +10,6 @@ const express = require('express');
 const router = express.Router();
 const person = require('../models/taplin-person');
 
-/**
- * findAllPersons
- * @openapi
- * /api/persons:
- *   get:
- *     tags:
- *       - Persons
- *     description: API for returning an array of person objects.
- *     summary: returns an array of persons in JSON format.
- *     responses:
- *       '200':
- *         description: Array of persons.
- *       '500':
- *         description: Server Exception.
- *       '501':
- *         description: MongoDB Exception.
- */
 router.get('/persons', async(req, res) => {
     try {
         //find all person documents from database
@@ -53,58 +36,6 @@ router.get('/persons', async(req, res) => {
     }
 })
 
-/**
- * createPerson
- * @openapi
- * /api/persons:
- *   post:
- *     tags:
- *       - Persons
- *     name: createPerson
- *     description: API for adding new person document to MongoDB database center
- *     summary: Creates new person document
- *     requestBody:
- *       description: person information
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - firstName
- *               - lastName
- *               - roles
- *               - dependents
- *               - birthDate
- *             properties:
- *               firstName:
- *                 type: string
- *               lastName:
- *                 type: string
- *               roles:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     text:
- *                       type: string
- *               dependents:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     firstName:
- *                       type: string
- *                     lastName:
- *                       type: string
- *               birthDate:
- *                 type: string
- *     responses:
- *       '200':
- *         description: Person added
- *       '500':
- *         description: Server Exception
- *       '501':
- *         description: MongoDB Exception
- */
 
 
 router.post('/persons', async(req, res) => {

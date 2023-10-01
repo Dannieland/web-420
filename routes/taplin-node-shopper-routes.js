@@ -9,40 +9,7 @@ node shopper routes for composer api
 const express = require('express');
 const router = express.Router();
 const Customer = require('../models/taplin-customer');
-/**
- * createCustomer
- * @openapi
- * /api/customers:
- *   post:
- *     tags:
- *       - Customers
- *     name: createCustomer
- *     description: API for adding a new customer document to MongoDB Atlas
- *     summary: Creates a new customer document
- *     requestBody:
- *       description: Customer information
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - firstName
- *               - lastName
- *               - username
- *             properties:
- *               firstName:
- *                 type: string
- *               lastName:
- *                 type: string
- *               username:
- *                 type: string
- *     responses:
- *       '200':
- *         description: Customer added
- *       '500':
- *         description: Server Exception
- *       '501':
- *         description: MongoDB Exception
- */
+
 router.post('/customers', async(req, res) => {
     try {
         //create new customer object using requests parameters
@@ -78,56 +45,7 @@ router.post('/customers', async(req, res) => {
     }
 })
 
-/**
- * createInvoiceByUserName
- * @openapi
- * /api/customers/{username}/invoices:
- *   post:
- *     tags:
- *       - Customers
- *     name: createInvoiceByUserName
- *     description: API for adding a new invoice document to MongoDB Atlas
- *     summary: Creates a new invoice to a customer document
- *     requestBody:
- *       description: invoice information
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - firstName
- *               - lastName
- *               - username
- *               - invoices
- *             properties:
- *               username:
- *                 type: string
- *               subtotal:
- *                 type: string
- *               tax:
- *                 type: string
- *               dateCreated:
- *                 type: string
- *               dateShipped:
- *                 type: string
- *               lineItems:
- *                 type: array
- *                 items:
- *                  type: object
- *                  properties:
- *                    name:
- *                      type: string
- *                    price:
- *                      type: number
- *                    quantity:
- *                      type: number
- *     responses:
- *       '200':
- *         description: Invoice added
- *       '500':
- *         description: Server Exception
- *       '501':
- *         description: MongoDB Exception
- */
+
 router.post('/customers/:username/invoices', async(req, res) => {
     try {
 
@@ -171,30 +89,7 @@ router.post('/customers/:username/invoices', async(req, res) => {
     }
 })
 
-/**
- * findAllInvoicesByUserName
- * @openapi
- * /api/customers/{username}/invoices:
- *   get:
- *     tags:
- *       - Customers
- *     description:  API for returning invoices by username
- *     summary: Returns invoices for the given username
- *     parameters:
- *       - name: username
- *         in: path
- *         required: true
- *         description: Customer document username
- *         schema:
- *           type: string
- *     responses:
- *       '200':
- *         description: Invoices array
- *       '500':
- *         description: Server exception
- *       '501':
- *         description: MongoDB Exception
- */
+
 router.get('/customers/:username/invoices', async(req, res) => {
     try {
         //find customer matching select username 

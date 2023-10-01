@@ -15,45 +15,6 @@ const bcrypt = require('bcryptjs');
 
 const saltRounds = 10;
 
-/**
- * signup
- * @openapi
- * /api/signup:
- *   post:
- *     tags:
- *       - Users
- *     name: signup
- *     summary: Register user
- *     requestBody:
- *       description: User information
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - username
- *               - password
- *               - emailAddress
- *             properties:
- *               username:
- *                 type: string
- *               password:
- *                 type: string
- *               emailAddress:
- *                 type: array
- *                 items:
- *                   type: object
- *                   properties:
- *                     email:
- *                       type: string
- *     responses:
- *       '200':
- *         description: User added to MongoDB
- *       '500':
- *         description: Server Exception
- *       '501':
- *         description: MongoDB Exception
- */
-
 
 router.post('/signup', async(req, res) => {
     try {
@@ -124,38 +85,6 @@ router.post('/signup', async(req, res) => {
     }
 })
 
-/**
- * login
- * @openapi
- * /api/login:
- *   post:
- *     tags:
- *       - Users
- *     name: Login user
- *     summary: Logs the user in
- *     requestBody:
- *       description: User information
- *       content:
- *         application/json:
- *           schema:
- *             required:
- *               - username
- *               - password
- *             properties:
- *               username:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       '200':
- *         description: User logged in
- *       '401':
- *         description: Invalid username or password
- *       '500':
- *         description: Server Exception
- *       '501':
- *         description: MongoDB Exception
- */
 router.post('/login', async(req, res) => {
     try {
         //query database for user with the 'username' in request body
