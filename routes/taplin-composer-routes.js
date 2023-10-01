@@ -168,31 +168,7 @@ router.post('/composers', async(req, res) => {
     }
 })
 
-/**
- * deleteComposerById
- * @openapi
- * /api/composers/{id}:
- *   delete:
- *     tags:
- *       - Composers
- *     name: deleteComposerById
- *     description: API for deleting a document from MongoDB.
- *     summary: Removes a document from MongoDB.
- *     parameters:
- *       - name: id
- *         in: path
- *         required: true
- *         description: id of the document to remove. 
- *         schema: 
- *           type: string
- *     responses:
- *       '200':
- *         description: Composer deleted
- *       '500':
- *         description: Server Exception
- *       '501':
- *         description: MongoDB Exception
- */
+
   router.delete('/composers/:id', async (req, res) => {
   try {
       //store requested composer ID as variable
