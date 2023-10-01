@@ -1,0 +1,60 @@
+# taplin-persons.yaml
+# Danielle Taplin
+# 10/01/23
+# YAML file describing composer API operations
+
+#Set Open API version of 3.0.0
+openapi: 3.0.0
+#Title and version of API
+info:
+  title: Person API
+  version: 1.0.0
+
+paths:
+#Describe the findAllPersons GET operations and responses
+  /api/persons:
+    get:
+      tags:
+        - Persons
+      summary: Retrieve all persons
+      operationId: findAllPersons
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
+    post:
+      tags:
+        - Persons
+      summary: Create a new person
+      operationId: createPerson
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+              dependents:
+                type: array
+                items:
+                  type: string
+              roles:
+                type: array
+                items:
+                  type: string
+              birthDate:
+                type: string
+      responses:
+        '200':
+          description: Successful response
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception

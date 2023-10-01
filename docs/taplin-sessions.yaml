@@ -1,0 +1,66 @@
+# taplin-sessions.yaml
+# Danielle Taplin
+# 10/01/23
+# YAML file describing composer API operations
+
+
+#Set Open API version of 3.0.0
+openapi: 3.0.0
+#Title and version of API
+info:
+  title: User Session API
+  version: 1.0.0
+
+paths:
+#Describe the userSignup POST operations and responses
+  /api/signup:
+    post:
+      summary: User signup
+      operationId: userSignup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userName:
+                  type: string
+                password:
+                  type: string
+                emailAddress:
+                  type: string
+      responses:
+        '200':
+          description: User registered successfully
+        '401':
+          description: Username is already in use
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB Exception
+#Describe the userLogin POST operations and responses
+  /api/login:
+    post:
+      summary: User login
+      operationId: userLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+            type: object
+            properties:
+              userName:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: User logged in successfully
+        '401':
+          description: Invalid username and/or password
+        '500':
+          description: Server exception
+        '501':
+          description: MongoDB Exception

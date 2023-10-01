@@ -17,9 +17,13 @@ const swaggerJsdoc = require('swagger-jsdoc');
 
 //require the APIs from routes file
 const composerAPI = require('./routes/taplin-composer-routes');
-const personAPI = require('./routes/taplin-person-routes')
-const userAPI = require('./routes/taplin-session-routes')
-const customerAPI = require('./routes/taplin-node-shopper-routes')
+const Composer = require('./models/taplin-composer');
+const personAPI = require('./routes/taplin-person-routes');
+const Person = require('./models/taplin-person');
+const sessionRoutes = require('./routes/taplin-session-routes');
+const User = require('./models/taplin-user');
+const customerAPI = require('./routes/taplin-node-shopper-routes');
+const Customer = require('./models/taplin-customer');
 
 //create variable for MongoDB connection string
 const CONN = 'mongodb+srv://web420_user:s3cret@composers.7jfs9oc.mongodb.net/web420DB';
@@ -49,7 +53,12 @@ const options = {
             version: "1.0.0",
         },
     },
-    apis: ['./routes/*.js'], 
+    apis: [
+        './docs/taplin-composers.yaml',
+        './docs/taplin-persons.yaml',
+        './docs/taplin-sessions.yaml',
+        './docs/taplin-customers.yaml',
+    ],
 };
 
 const openapiSpecification = swaggerJsdoc(options);
