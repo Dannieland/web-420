@@ -1,0 +1,100 @@
+# Danielle Taplin
+# taplin-team.yaml
+# API for managing teams and players
+# 10/3/2023
+
+
+openapi: 3.0.0
+info:
+  title: Team and Player API
+  version: 1.0.0
+
+tags:
+  - name: Teams (Capstone Project)
+
+paths:
+  /api/teams:
+    get:
+      tags:
+        - Teams (Capstone Project)
+      summary: Retrieve all teams
+      responses:
+        '200':
+          description: Array of team documents
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
+
+  /api/teams/{id}/players:
+    post:
+      tags:
+        - Teams (Capstone Project)
+      summary: Assign player to a team
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                salary:
+                  type: string
+      responses:
+        '200':
+          description: Player document
+        '401':
+          description: Invalid teamId
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
+    get:
+      tags:
+        - Teams (Capstone Project)
+      summary: Retrieve all players by team ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Array of player documents
+        '401':
+          description: Invalid teamId
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception
+
+  /api/teams/{id}:
+    delete:
+      tags:
+        - Teams (Capstone Project)
+      summary: Delete team by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Team document
+        '401':
+          description: Invalid teamId
+        '500':
+          description: Server Exception
+        '501':
+          description: MongoDB Exception

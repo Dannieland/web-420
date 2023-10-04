@@ -24,6 +24,7 @@ const sessionRoutes = require('./routes/taplin-session-routes');
 const User = require('./models/taplin-user');
 const customerAPI = require('./routes/taplin-node-shopper-routes');
 const Customer = require('./models/taplin-customer');
+const teamAPI = require('./routes/taplin-team-routes');
 
 //create variable for MongoDB connection string
 const CONN = 'mongodb+srv://web420_user:s3cret@composers.7jfs9oc.mongodb.net/test';
@@ -58,6 +59,7 @@ const options = {
         './docs/taplin-persons.yaml',
         './docs/taplin-sessions.yaml',
         './docs/taplin-customers.yaml',
+        './docs/taplin-team.yaml',
     ],
 };
 
@@ -70,6 +72,7 @@ app.use('/api', composerAPI);
 app.use('/api', personAPI);
 app.use('/api', sessionRoutes);
 app.use('/api', customerAPI);
+app.use('/api', teamAPI);
 
 
 // Server location
