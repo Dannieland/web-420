@@ -4,40 +4,44 @@
 # 10/3/2023
 
 
+#Set Open API version of 3.0.0
 openapi: 3.0.0
+#Title and version of API
 info:
-  title: Team and Player API
+  title: Team API
   version: 1.0.0
-
-tags:
-  - name: Teams (Capstone Project)
 
 paths:
   /api/teams:
     get:
       tags:
-        - Teams (Capstone Project)
-      summary: Retrieve all teams
+        - Team
+      summary: Get all teams.
+      operationId: findAllTeams
       responses:
-        '200':
-          description: Array of team documents
-        '500':
-          description: Server Exception
-        '501':
-          description: MongoDB Exception
+        200:
+          description: An array of team documents.
+        500:
+          description: Server Exception.
+        501:
+          description: MongoDB Exception.
 
   /api/teams/{id}/players:
     post:
       tags:
-        - Teams (Capstone Project)
-      summary: Assign player to a team
+        - Team
+      summary: Assign a player to a team by ID.
+      operationId: assignPlayersToTeam
       parameters:
-        - name: id
-          in: path
-          required: true
+        - in: path
+          name: id
           schema:
             type: string
+          required: true
+          description: Team ID.
       requestBody:
+        description: Player's information.
+        required: true
         content:
           application/json:
             schema:
@@ -48,53 +52,58 @@ paths:
                 lastName:
                   type: string
                 salary:
-                  type: string
+                  type: number
       responses:
-        '200':
-          description: Player document
-        '401':
-          description: Invalid teamId
-        '500':
-          description: Server Exception
-        '501':
-          description: MongoDB Exception
+        200:
+          description: Player document.
+        401:
+          description: Invalid teamId.
+        500:
+          description: Server Exception.
+        501:
+          description: MongoDB Exception.
+
     get:
       tags:
-        - Teams (Capstone Project)
-      summary: Retrieve all players by team ID
+        - Team
+      summary: Get all players for a team by ID.
+      operationId: findAllPlayersByTeamId
       parameters:
-        - name: id
-          in: path
-          required: true
+        - in: path
+          name: id
           schema:
             type: string
+          required: true
+          description: Team ID.
       responses:
-        '200':
-          description: Array of player documents
-        '401':
-          description: Invalid teamId
-        '500':
-          description: Server Exception
-        '501':
-          description: MongoDB Exception
+        200:
+          description: An array of player documents.
+        401:
+          description: Invalid teamId.
+        500:
+          description: Server Exception.
+        501:
+          description: MongoDB Exception.
 
   /api/teams/{id}:
     delete:
       tags:
-        - Teams (Capstone Project)
-      summary: Delete team by ID
+        - Team
+      summary: Delete a team by ID.
+      operationId: deleteTeamById
       parameters:
-        - name: id
-          in: path
-          required: true
+        - in: path
+          name: id
           schema:
             type: string
+          required: true
+          description: Team ID.
       responses:
-        '200':
-          description: Team document
-        '401':
+        200:
+          description: Team Document.
+        401:
           description: Invalid teamId
-        '500':
-          description: Server Exception
-        '501':
-          description: MongoDB Exception
+        500:
+          description: Server Exception.
+        501:
+          description: MongoDB Exception.

@@ -25,6 +25,7 @@ const User = require('./models/taplin-user');
 const customerAPI = require('./routes/taplin-node-shopper-routes');
 const Customer = require('./models/taplin-customer');
 const teamAPI = require('./routes/taplin-team-routes');
+const Team = require('./models/taplin-team');
 
 //create variable for MongoDB connection string
 const CONN = 'mongodb+srv://web420_user:s3cret@composers.7jfs9oc.mongodb.net/test';

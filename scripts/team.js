@@ -3,7 +3,6 @@
 // team script for capstone project
 // 10/3/2023
 
-const db = db.getSiblingDB('web420DB');
 
 // Drop the existing 'teams' collection if it exists
 db.teams.drop();

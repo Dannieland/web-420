@@ -3,71 +3,75 @@
 // teams routes for capstone project
 // 10/3/2023
 
-// Require statements
+// Declare Variables
 const express = require('express');
 const router = express.Router();
-const Teams = require('../models/taplin-team');
+const Team = require('../models/taplin-team');
 
-// GET all teams - Operation: findAllTeams
+// Route to find all teams
 router.get('/teams', async (req, res) => {
-  try {
-    const teams = await Teams.find();
-    res.status(200).json(teams);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+    try{
+        const teams = await Team.find();
+        res.status(200).json(teams);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Exception' });
+    }
 });
 
-// POST assign player to team - Operation: assignPlayerToTeam
+// Route to post player to team
 router.post('/teams/:id/players', async (req, res) => {
-  const teamId = req.params.id;
-  try {
-    const team = await Teams.findById(teamId);
-    if (team) {
-      team.players.push({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        salary: req.body.salary
-      });
-      await team.save();
-      res.status(200).json(team);
-    } else {
-      res.status(401).json({ message: 'Invalid teamId' });
+    const { id } = req.params;
+    const { firstName, lastName, salary } = req.body;
+
+    try {
+        const team = await Team.findById(id);
+
+        if (!team) {
+            return res.status(401).json({ message: 'Invalid teamId' });
+        }
+
+        const newPlayer = { firstName, lastName, salary };
+        team.players.push(newPlayer);
+
+        const savedTeam = await team.save();
+        res.status(200).json(savedTeam.players[savedTeam.players.length - 1]);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Exception' });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 });
 
-// GET all players by team ID - Operation: findAllPlayersByTeamId
+// Route to find all Players on Team
 router.get('/teams/:id/players', async (req, res) => {
-  const teamId = req.params.id;
-  try {
-    const team = await Teams.findById(teamId);
-    if (team) {
-      res.status(200).json(team.players);
-    } else {
-      res.status(401).json({ message: 'Invalid teamId' });
+    const { id } = req.params;
+
+    try {
+        const team = await Team.findById(id);
+
+        if (!team) {
+            return res.status(401).json({ message: 'Invalid teamId' });
+        }
+
+        res.status(200).json(team.players);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Exception' });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 });
 
-// DELETE team by ID - Operation: deleteTeamById
+// Route to delete a team
 router.delete('/teams/:id', async (req, res) => {
-  const teamId = req.params.id;
-  try {
-    const deletedTeam = await Teams.findByIdAndDelete(teamId);
-    if (deletedTeam) {
-      res.status(200).json(deletedTeam);
-    } else {
-      res.status(401).json({ message: 'Invalid teamId' });
+    const { id } = req.params;
+
+    try {
+        const deleteTeam = await Team.findByIdAndRemove(id);
+
+        if (!deleteTeam) {
+            return res.status(401).json({ message: 'Invalid teamId' });
+        }
+
+        res.status(200).json(deleteTeam);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Exception' });
     }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
 });
 
-// export router
 module.exports = router;
